@@ -29,6 +29,7 @@ namespace DesafioEstacionamento.Models
 
             try
             {
+                if (PlacaJaExistente(placa)) throw new ArgumentException($"Já existe um veículo com a placa {placa} no estacionamento.");
                 veiculos.Add(new Veiculo(placa, modelo, cor));
             } 
             catch (ArgumentException e)
@@ -47,14 +48,16 @@ namespace DesafioEstacionamento.Models
         {
             try
             {
-                var veiculoARemover = veiculos.First(v => v.ObterPlaca().Equals(placa));
+                if (!PlacaJaExistente(placa)) throw new ArgumentException($"Não existe nenhum veículo com a placa {placa} no estacionamento.");
+
+                Veiculo veiculoARemover = veiculos.First(veiculo => veiculo.ObterPlaca().Equals(placa));
                 Console.WriteLine("Removendo o veículo: " + veiculoARemover);
                 veiculos.Remove(veiculoARemover);
                 Console.WriteLine($"Veículo removido!\nTotal a pagar: {(precoInicial + precoPorHora).ToString("C", System.Globalization.CultureInfo.GetCultureInfo("pt-br"))}");
-            } catch (InvalidOperationException e)
+            } catch (ArgumentException e)
             {
                 Console.WriteLine("[ERRO]");
-                Console.WriteLine($"Não existe nenhum veículo com a placa {placa} no estacionamento.");
+                Console.WriteLine(e.Message);
             } catch (Exception e)
             {
                 Console.WriteLine("[ERRO]");
