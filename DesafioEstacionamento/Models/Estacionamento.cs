@@ -43,9 +43,24 @@ namespace DesafioEstacionamento.Models
             }
         }
 
-        public void RemoverVeiculo()
+        public void RemoverVeiculo(string placa)
         {
 
+            try
+            {
+                var veiculoARemover = veiculos.First(v => v.ObterPlaca().Equals(placa));
+                Console.WriteLine("Removendo o veículo: " + veiculoARemover);
+                veiculos.Remove(veiculoARemover);
+                Console.WriteLine($"Veículo removido!\nTotal a pagar: {(precoInicial + precoPorHora).ToString("C", System.Globalization.CultureInfo.GetCultureInfo("pt-br"))}");
+            } catch (InvalidOperationException e)
+            {
+                Console.WriteLine("[ERRO]");
+                Console.WriteLine($"Não existe nenhum veículo com a placa {placa} no estacionamento.");
+            } catch (Exception e)
+            {
+                Console.WriteLine("[ERRO]");
+                Console.WriteLine("Ocorreu um erro inesperado: " + e.Message);
+            }
         }
 
         public void ListarVeiculos()
