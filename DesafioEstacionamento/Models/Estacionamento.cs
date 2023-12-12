@@ -65,7 +65,7 @@ namespace DesafioEstacionamento.Models
 
         public void ListarVeiculos()
         {
-            
+            veiculos.ForEach(veiculo => Console.WriteLine($"{veiculos.IndexOf(veiculo) + 1} - {veiculo})"));
         }
     }
 }
