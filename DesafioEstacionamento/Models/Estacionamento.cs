@@ -67,7 +67,10 @@ namespace DesafioEstacionamento.Models
 
         public void ListarVeiculos()
         {
-            veiculos.ForEach(veiculo => Console.WriteLine($"{veiculos.IndexOf(veiculo) + 1} - {veiculo})"));
+            if (veiculos.Any())
+                veiculos.ForEach(veiculo => Console.WriteLine($"{veiculos.IndexOf(veiculo) + 1} - {veiculo})"));
+            else
+                Console.WriteLine("O estacionamento está vazio!");
         }
 
         private bool PlacaExisteNoEstacionamento(string placa)
