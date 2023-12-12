@@ -8,8 +8,8 @@ namespace DesafioEstacionamento.Models
 {
     public class Estacionamento
     {
-        private decimal precoInicial;
-        private decimal precoPorHora;
+        private readonly decimal precoInicial;
+        private readonly decimal precoPorHora;
         private List<Veiculo> veiculos = new List<Veiculo>();
 
         public Estacionamento(decimal precoInicial, decimal precoPorHora)
@@ -45,7 +45,6 @@ namespace DesafioEstacionamento.Models
 
         public void RemoverVeiculo(string placa)
         {
-
             try
             {
                 var veiculoARemover = veiculos.First(v => v.ObterPlaca().Equals(placa));
@@ -66,6 +65,16 @@ namespace DesafioEstacionamento.Models
         public void ListarVeiculos()
         {
             veiculos.ForEach(veiculo => Console.WriteLine($"{veiculos.IndexOf(veiculo) + 1} - {veiculo})"));
+        }
+
+        private bool PlacaJaExistente(string placa)
+        {
+            return veiculos.Aggregate(false, (acc, veiculo) => 
+            {
+                if (veiculo.ObterPlaca().Equals(placa))
+                    acc = true;
+                return acc;
+            });
         }
     }
 }
