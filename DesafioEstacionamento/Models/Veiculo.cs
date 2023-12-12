@@ -40,7 +40,7 @@ namespace DesafioEstacionamento.Models
 
         public override string ToString()
         {
-            return $"Placa: {placa}\nModelo: {modelo}\nCor: {cor}";
+            return $$"""{Placa: {{placa}}, Modelo: {{modelo}}, Cor: {{cor}}}""";
         }
     }
 }
