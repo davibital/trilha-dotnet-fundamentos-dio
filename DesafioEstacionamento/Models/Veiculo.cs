@@ -8,13 +8,13 @@ namespace DesafioEstacionamento.Models
 {
     public class Veiculo
     {
-        private string placa;
-        private string modelo;
-        private string cor;
+        private readonly string placa;
+        private readonly string modelo;
+        private readonly string cor;
 
         public Veiculo(string placa, string modelo, string cor)
         {
-            if (placaValida(placa))
+            if (PlacaValida(placa))
             {
                 this.placa = placa;
                 this.modelo = modelo;
@@ -26,7 +26,12 @@ namespace DesafioEstacionamento.Models
             } 
         }
 
-        private bool placaValida(string placa)
+        public string ObterPlaca()
+        {
+            return placa;
+        }
+
+        private bool PlacaValida(string placa)
         {
             string padraoPlaca = @"^[A-Z]{3}-\d{1}[A-Z]{1}\d{2}$";
 
