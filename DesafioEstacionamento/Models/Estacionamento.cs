@@ -82,7 +82,7 @@ namespace DesafioEstacionamento.Models
             else
             {
                 Console.WriteLine("Veículos estacionados: ");
-                veiculos.ForEach(veiculo => Console.WriteLine($"{veiculos.IndexOf(veiculo) + 1} - {veiculo})"));
+                veiculos.ForEach(veiculo => Console.WriteLine($"{veiculos.IndexOf(veiculo) + 1} - {veiculo}"));
             }
         }
 
