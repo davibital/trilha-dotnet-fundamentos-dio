@@ -47,5 +47,5 @@ while (sistemaEmExecucao)
   }
 
   Console.WriteLine("\nPressione uma tecla para continuar.");
-  Console.ReadLine();
+  Console.ReadKey();
 }
