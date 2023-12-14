@@ -44,21 +44,31 @@ namespace DesafioEstacionamento.Models
             }
         }
 
-        public void RemoverVeiculo(string placa)
+        public void RemoverVeiculo()
         {
+            ListarVeiculos();
+            if (EstacionamentoEstaVazio()) return;
+
+            Console.WriteLine("Selecione o veículo que deseja remover do estacionamento, indicando o seu índice: ");
+
             try
             {
-                if (!PlacaExisteNoEstacionamento(placa)) throw new ArgumentException($"Não existe nenhum veículo com a placa {placa} no estacionamento.");
-
-                Veiculo veiculoARemover = veiculos.First(veiculo => veiculo.ObterPlaca().Equals(placa));
-                Console.WriteLine("Removendo o veículo: " + veiculoARemover);
-                veiculos.Remove(veiculoARemover);
+                int indice = Convert.ToInt32(Console.ReadLine()) - 1;
+                Console.WriteLine("Removendo o veículo: " + veiculos[indice]);
+                veiculos.RemoveAt(indice);
                 Console.WriteLine($"Veículo removido!\nTotal a pagar: {(precoInicial + precoPorHora).ToString("C", System.Globalization.CultureInfo.GetCultureInfo("pt-br"))}");
-            } catch (ArgumentException e)
+            } 
+            catch (FormatException e)
             {
                 Console.WriteLine("[ERRO]");
-                Console.WriteLine(e.Message);
-            } catch (Exception e)
+                Console.WriteLine("O índice precisa ser um número.");
+            }
+            catch (ArgumentOutOfRangeException e)
+            {
+                Console.WriteLine("[ERRO]");
+                Console.WriteLine("O índice digitado não corresponde a nenhum veículo.");
+            } 
+            catch (Exception e)
             {
                 Console.WriteLine("[ERRO]");
                 Console.WriteLine("Ocorreu um erro inesperado: " + e.Message);
@@ -67,10 +77,13 @@ namespace DesafioEstacionamento.Models
 
         public void ListarVeiculos()
         {
-            if (veiculos.Any())
-                veiculos.ForEach(veiculo => Console.WriteLine($"{veiculos.IndexOf(veiculo) + 1} - {veiculo})"));
-            else
+            if (EstacionamentoEstaVazio())
                 Console.WriteLine("O estacionamento está vazio!");
+            else
+            {
+                Console.WriteLine("Veículos estacionados: ");
+                veiculos.ForEach(veiculo => Console.WriteLine($"{veiculos.IndexOf(veiculo) + 1} - {veiculo})"));
+            }
         }
 
         private bool PlacaExisteNoEstacionamento(string placa)

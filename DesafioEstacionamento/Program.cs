@@ -30,9 +30,7 @@ while (sistemaEmExecucao)
       estacionamento.AdicionarVeiculo();
       break;
     case "2":
-      Console.WriteLine("Digite a placa do veículo que será removido do estacionamento: ");
-      string placaVeiculo = Console.ReadLine();
-      estacionamento.RemoverVeiculo(placaVeiculo);
+      estacionamento.RemoverVeiculo();
       break;
     case "3":
       estacionamento.ListarVeiculos();
