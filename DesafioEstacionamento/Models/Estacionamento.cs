@@ -82,5 +82,10 @@ namespace DesafioEstacionamento.Models
                 return acc;
             });
         }
+
+        private bool EstacionamentoEstaVazio()
+        {
+            return !veiculos.Any();
+        }
     }
 }
